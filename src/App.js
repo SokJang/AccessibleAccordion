@@ -1,6 +1,6 @@
 import React from "react";
-import { Accordion } from "./components/accordion";
-import { AccordionSection } from "./components/accordionSection";
+import { Accordion } from "./components/Accordion";
+import { AccordionSection } from "./components/AccordionSection";
 
 const App = () => (
   <Accordion>
