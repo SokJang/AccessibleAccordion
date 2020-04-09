@@ -5,6 +5,7 @@ import React, {
   useRef,
   useMemo,
 } from "react";
+import PropTypes from "prop-types";
 import styles from "./Accordion.module.css";
 
 // 2.
@@ -20,10 +21,14 @@ import styles from "./Accordion.module.css";
 const AccordionContext = createContext({
   focusRef: {},
   selected: null,
+  // expanded container
+  expandedAll: {},
+  // default
+  onToggle: undefined,
 });
 export const useAccordionContext = () => useContext(AccordionContext);
 
-export const Accordion = ({ children }) => {
+export const Accordion = ({ children, expanded, onToggle }) => {
   // 1.
   // store keyboard usage (Up Arrow and Down Arrow) with focusRef
   /* useRef returns a mutable ref object whose .current property is initialized
@@ -44,8 +49,12 @@ export const Accordion = ({ children }) => {
   This optimization helps to avoid expensive calculations on every render.
    */
 
-  // focusRef is known through context provider
-  const context = useMemo(() => ({ focusRef, selected }), [selected]);
+  // higher order function passing context props through (except expandedAll gets additionally a default assignment)
+  const context = useMemo(
+    () => ({ focusRef, selected, expandedAll: expanded, onToggle }),
+    // watched (for change) dependencies
+    [selected, expanded, onToggle]
+  );
 
   // Check if id is unique
   if (process.env.NODE_ENV === "development") {
@@ -128,4 +137,13 @@ export const Accordion = ({ children }) => {
       </AccordionContext.Provider>
     </div>
   );
+};
+
+Accordion.propTypes = {
+  expanded: PropTypes.objectOf(PropTypes.bool),
+  onToggle: PropTypes.func,
+};
+
+Accordion.defaultProps = {
+  expanded: {},
 };
