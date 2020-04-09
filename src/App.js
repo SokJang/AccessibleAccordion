@@ -4,16 +4,21 @@ import { Accordion } from "./components/Accordion";
 import { AccordionSection } from "./components/AccordionSection";
 
 const App = () => {
-  const [expanded1, setExpanded1] = useState(false);
-  const [expanded2, setExpanded2] = useState(true);
+  const [expanded, setExpanded] = useState({ "2": true });
+  const toggle = (id) => {
+    setExpanded({
+      ...expanded,
+      [id]: !expanded[id],
+    });
+  };
   return (
     <div className={styles.Wrapper}>
       <Accordion>
         <AccordionSection
           title="section 1"
           id="1"
-          expanded={expanded1}
-          onToggle={() => setExpanded1(!expanded1)}
+          expanded={expanded["1"]}
+          onToggle={toggle}
         >
           Alice was beginning to get very tired of sitting by her sister on the
           bank, and of having nothing to do: once or twice she had peeped into
@@ -24,8 +29,8 @@ const App = () => {
         <AccordionSection
           title="section 2"
           id="2"
-          expanded={expanded2}
-          onToggle={() => setExpanded2(!expanded2)}
+          expanded={expanded["2"]}
+          onToggle={toggle}
         >
           <a href="#test">Alice </a>
           was beginning to get very tired of sitting by her sister on the bank,
