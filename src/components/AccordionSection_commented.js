@@ -69,6 +69,7 @@ export const AccordionSection = ({
   );
 };
 
+// heavily relying on ids, in case developer forget to provide a unique id, a subtle error is provided
 AccordionSection.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,

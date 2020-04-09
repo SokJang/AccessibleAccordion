@@ -45,8 +45,22 @@ export const Accordion = ({ children }) => {
    */
 
   // focusRef is known through context provider
-  // eslint-disable-next-line no-undef
   const context = useMemo(() => ({ focusRef, selected }), [selected]);
+
+  // Check if id is unique
+  if (process.env.NODE_ENV === "development") {
+    const uniqueIds = new Set();
+    React.Children.forEach(children, (child) => {
+      if (uniqueIds.has(child.props.id)) {
+        console.warn(
+          `AccordionSection id param should be unique, found duplicate key: ${child.props.id}`
+        );
+      } else {
+        uniqueIds.add(child.props.id);
+      }
+    });
+  }
+
   return (
     <div
       className={styles.Accordion}
