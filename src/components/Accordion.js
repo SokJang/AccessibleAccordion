@@ -5,18 +5,24 @@ import React, {
   useRef,
   useMemo,
 } from "react";
+import PropTypes from "prop-types";
 import styles from "./Accordion.module.css";
 
 const AccordionContext = createContext({
   focusRef: {},
   selected: null,
+  expandedAll: {},
+  onToggle: undefined,
 });
 export const useAccordionContext = () => useContext(AccordionContext);
 
-export const Accordion = ({ children }) => {
+export const Accordion = ({ children, expanded, onToggle }) => {
   const focusRef = useRef(null);
   const [selected, setSelected] = useState(null);
-  const context = useMemo(() => ({ focusRef, selected }), [selected]);
+  const context = useMemo(
+    () => ({ focusRef, selected, expandedAll: expanded, onToggle }),
+    [selected, expanded, onToggle]
+  );
 
   if (process.env.NODE_ENV === "development") {
     const uniqueIds = new Set();
@@ -91,4 +97,13 @@ export const Accordion = ({ children }) => {
       </AccordionContext.Provider>
     </div>
   );
+};
+
+Accordion.propTypes = {
+  expanded: PropTypes.objectOf(PropTypes.bool),
+  onToggle: PropTypes.func,
+};
+
+Accordion.defaultProps = {
+  expanded: {},
 };

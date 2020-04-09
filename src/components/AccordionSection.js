@@ -3,17 +3,12 @@ import PropTypes from "prop-types";
 import styles from "./AccordionSection.module.css";
 import { useAccordionContext } from "./Accordion";
 
-export const AccordionSection = ({
-  children,
-  title,
-  expanded,
-  id,
-  onToggle,
-}) => {
+export const AccordionSection = ({ children, title, id }) => {
   const sectionId = `section-${id}`;
   const labelId = `label-${id}`;
 
-  const { focusRef, selected } = useAccordionContext();
+  const { focusRef, selected, expandedAll, onToggle } = useAccordionContext();
+  const expanded = expandedAll[id];
   const labelRef = useRef(null);
   useEffect(() => {
     if (id === selected && labelRef.current) {
@@ -30,12 +25,12 @@ export const AccordionSection = ({
         id={labelId}
         tabIndex={0}
         className={styles.Label}
-        onClick={() => onToggle(id)}
+        onClick={() => onToggle && onToggle(id)}
         onKeyDown={(e) => {
           switch (e.key) {
             case " ":
             case "Enter":
-              onToggle(id);
+              onToggle && onToggle(id);
               break;
             default:
           }
@@ -67,6 +62,4 @@ export const AccordionSection = ({
 AccordionSection.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
-  expanded: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func,
 };
