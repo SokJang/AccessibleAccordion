@@ -66,3 +66,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### `Cypress` (chrome headless) end 2 end testing accessibility
+
+https://docs.cypress.io/guides/getting-started/installing-cypress.html#Continuous-integration
+Installation
+
+- npm install cypress --save-dev
+- npx cypress open
+- add baseURL in cypress.json
+- add executable in package.json
+  `{ "scripts": { "cypress:open": "cypress open" } }` - can be run with: `npm run cypress:open` - be sure that the baseUrl of the react app is running on the same baseUrl port of the cypress test server
