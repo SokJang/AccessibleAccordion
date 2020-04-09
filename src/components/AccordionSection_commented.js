@@ -7,9 +7,13 @@ export const AccordionSection = ({ children, title, id }) => {
   const sectionId = `section-${id}`;
   const labelId = `label-${id}`;
 
+  // consuming context
   const { focusRef, selected, expandedAll, onToggle } = useAccordionContext();
   const expanded = expandedAll[id];
+  // manage focus states with labelRef
   const labelRef = useRef(null);
+  // to call focus() we need useEffect()
+  // conditionally firing the effect only in changed props [id, selected]
   useEffect(() => {
     if (id === selected && labelRef.current) {
       labelRef.current.focus();
@@ -35,6 +39,7 @@ export const AccordionSection = ({ children, title, id }) => {
             default:
           }
         }}
+        // mutable focusRe stored in context
         onFocus={() => {
           focusRef.current = id;
         }}
@@ -59,6 +64,7 @@ export const AccordionSection = ({ children, title, id }) => {
   );
 };
 
+// heavily relying on ids, in case developer forget to provide a unique id, a subtle error is provided
 AccordionSection.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   title: PropTypes.string.isRequired,
