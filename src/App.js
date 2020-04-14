@@ -20,7 +20,7 @@ const App = () => {
         </AccordionSection>
         <AccordionSection title="section 2" id="id2">
           <p>
-            <a href="#test">Alice </a>
+            <a href="/">Test link Alice</a>
             was beginning to get very tired of sitting by her sister on the
             bank, and of having nothing to do: once or twice she had peeped into
             the book her sister was reading, but it had no pictures or

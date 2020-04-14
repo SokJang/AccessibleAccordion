@@ -66,3 +66,16 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### `Cypress` (chrome headless) end 2 end testing accessibility
+
+https://docs.cypress.io/guides/getting-started/installing-cypress.html#Continuous-integration
+Installation
+
+- npm install cypress --save-dev
+- npx cypress open
+- add baseURL in cypress.json
+- add executable in package.json
+  - `"test:e2e"` runs local end to end test on Accordion.js Unit test
+- Be aware that this repo does not include Continous Integration with cypress
+  - it does not solve the integration of Accordion.js into build steps
