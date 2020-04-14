@@ -76,4 +76,6 @@ Installation
 - npx cypress open
 - add baseURL in cypress.json
 - add executable in package.json
-  `{ "scripts": { "cypress:open": "cypress open" } }` - can be run with: `npm run cypress:open` - be sure that the baseUrl of the react app is running on the same baseUrl port of the cypress test server
+  - `"test:e2e"` runs local end to end test on Accordion.js Unit test
+- Be aware that this repo does not include Continous Integration with cypress
+  - it does not solve the integration of Accordion.js into build steps
